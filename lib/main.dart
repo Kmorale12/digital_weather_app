@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +34,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _cityController = TextEditingController();
+  void getWeather() {
+    void getWeather() {
+      final cityName = _cityController.text;
+      final random = Random();
+      final temperature = (50 + random.nextInt(51))
+          .toString(); // Generates a random temperature between 50 and 100
+      final weatherConditions = ['Cloudy', 'Sunny', 'Rainy'];
+      final weatherCondition =
+          weatherConditions[random.nextInt(weatherConditions.length)];
+
+      print('City: $cityName');
+      print('Temperature: $temperature°F');
+      print('Weather Condition: $weatherCondition');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
