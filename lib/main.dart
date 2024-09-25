@@ -34,20 +34,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _cityController = TextEditingController();
-  void getWeather() {
-    void getWeather() {
-      final cityName = _cityController.text;
-      final random = Random();
-      final temperature = (50 + random.nextInt(51))
-          .toString(); // Generates a random temperature between 50 and 100
-      final weatherConditions = ['Cloudy', 'Sunny', 'Rainy'];
-      final weatherCondition =
-          weatherConditions[random.nextInt(weatherConditions.length)];
+  String _temperature = '';
+  String _weatherCondition = '';
+  String _cityName = '';
 
-      print('City: $cityName');
-      print('Temperature: $temperature°F');
-      print('Weather Condition: $weatherCondition');
-    }
+  void getWeather() {
+    final cityName = _cityController.text;
+    final random = Random();
+    final temperature = (50 + random.nextInt(51))
+        .toString(); // Generates a random temperature between 50 and 100
+    final weatherConditions = ['Cloudy', 'Sunny', 'Rainy'];
+    final weatherCondition =
+        weatherConditions[random.nextInt(weatherConditions.length)];
+
+    setState(() {
+      _cityName = cityName;
+      _temperature = temperature;
+      _weatherCondition = weatherCondition;
+    });
   }
 
   @override
@@ -69,15 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
-                print(_cityController.text);
-              },
+              onPressed: getWeather, // Calls the getWeather function
               child: const Text('Get Weather'),
             ),
             const SizedBox(height: 30),
-            const Text('Weather:'),
-            const Text('Temperature:'),
-            const Text('Weather Condition:'),
+            Text('City: $_cityName'),
+            Text('Temperature: $_temperature°F'),
+            Text('Weather Condition: $_weatherCondition'),
           ],
         ),
       ),
